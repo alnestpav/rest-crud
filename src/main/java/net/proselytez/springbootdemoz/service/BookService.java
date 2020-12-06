@@ -3,7 +3,6 @@ package net.proselytez.springbootdemoz.service;
 import java.util.List;
 import net.proselytez.springbootdemoz.model.Book;
 import net.proselytez.springbootdemoz.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +10,6 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
-    @Autowired
     private BookService(BookRepository bookRepository){
         this.bookRepository = bookRepository;
     }
