@@ -1,15 +1,14 @@
 package net.proselytez.springbootdemoz.controller;
 
-import java.util.List;
 import net.proselytez.springbootdemoz.model.Book;
 import net.proselytez.springbootdemoz.service.BookService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/books")
 public class BookController {
 
     private final BookService bookService;
@@ -18,40 +17,33 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/books")
-    public String findAll(Model model){
+    @PostMapping
+    public ResponseEntity createBook(@RequestBody Book book){
+        Book createdBook = bookService.saveBook(book);
+        return ResponseEntity.ok(createdBook);
+    }
+
+    @GetMapping
+    public ResponseEntity getAll(){
         List<Book> books = bookService.findAll();
-        model.addAttribute("books", books);
-        return "book-list";
+        return ResponseEntity.ok(books);
     }
 
-    @GetMapping("/book-create")
-    public String createBookForm(Book book){
-        return "book-create";
-    }
-
-    @PostMapping("/book-create")
-    public String createBook(Book book){
-        bookService.saveBook(book);
-        return "redirect:/books";
-    }
-
-    @GetMapping("book-delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id){
-        bookService.deleteById(id);
-        return "redirect:/books";
-    }
-
-    @GetMapping("book-update/{id}")
-    public String updateBookForm(@PathVariable("id") Long id, Model model){
+    @GetMapping("/{id}")
+    public ResponseEntity get(@PathVariable("id") Long id){
         Book book = bookService.findById(id);
-        model.addAttribute("book", book);
-        return "/book-update";
+        return ResponseEntity.ok(book);
     }
 
-    @PostMapping("/book-update")
-    public String updateBook(Book book){
-        bookService.saveBook(book);
-        return "redirect:/books";
+    @PutMapping("/{id}")
+    public ResponseEntity updateBook(@PathVariable("id") Long id, @RequestBody Book book){
+        Book updatedBook = bookService.saveBook(book);
+        return ResponseEntity.ok(updatedBook);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteBook(@PathVariable("id") Long id){
+        bookService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
