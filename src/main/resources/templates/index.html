@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Library</title>
+
+    <!-- Ниже 3 ссылки - это нужно для работы Bootstrap (https://getbootstrap.com/)-->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -16,7 +19,7 @@
 <body>
 <div class="container">
     <h1 class="display-3">Books</h1>
-    <table class="table" id="bookTable">
+    <table class="table" id="bookTable"> <!-- https://getbootstrap.com/docs/5.0/content/tables/ -->
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -31,11 +34,11 @@
         </tbody>
     </table>
 
-    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createBookModal">Create</button></td>
+    <!-- https://getbootstrap.com/docs/5.0/components/buttons/-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createBookModal">Create</button>
 
 
-
-    <!-- Create Book Modal -->
+    <!-- Модальное окна для создания книги https://getbootstrap.com/docs/5.0/components/modal/ -->
     <div class="modal fade" id="createBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -54,7 +57,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="createBook()">Create</button>
+                    <button type="button" class="btn btn-primary" onclick="createBook()">Create</button> <!-- Смотри функцию createBook в файле main.js -->
                 </div>
             </div>
         </div>
@@ -62,7 +65,7 @@
 
 
 
-    <!-- Edit Book Modal -->
+    <!-- Модальное окна для редактирования книги -->
     <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -74,6 +77,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-body">
+                        <label for="editBookId">Id</label>
+                        <input type="text" disabled class="form-control" id="editBookId">
+
                         <label for="editBookName">Name</label>
                         <input type="text" class="form-control" id="editBookName">
 
@@ -83,7 +89,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="editBook()">Edit</button>
+                    <button type="button" class="btn btn-primary" onclick="editBook()">Edit</button> <!-- Смотри функцию editBook в файле main.js -->
                 </div>
             </div>
         </div>
@@ -91,6 +97,7 @@
 </div>
 </body>
 
-<script src="./js/main.js"></script>
+<script src="./js/main.js"></script>  <!-- Наш скрипт на JavaScript, чтобы загружались данные, работали кнопки и т.п. -->
+
 
 </html>
